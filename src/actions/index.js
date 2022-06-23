@@ -25,4 +25,11 @@ const getCurrences = () => async (dispatch) => {
   dispatch(addApi(api));
 };
 
+export const BUTTON_ADD = 'BUTTON_ADD';
+
+export const butnAdd = (state) => ({
+  type: BUTTON_ADD,
+  state,
+});
+
 export default getCurrences;

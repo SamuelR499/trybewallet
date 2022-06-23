@@ -1,4 +1,4 @@
-import { REQUEST_API } from '../actions';
+import { REQUEST_API, BUTTON_ADD } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
@@ -14,6 +14,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currencies: action.api,
+
+    };
+  case BUTTON_ADD:
+    return {
+      ...state,
+      expenses: [...state.expenses, action.state],
     };
   default:
     return state;

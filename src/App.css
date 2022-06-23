@@ -6,19 +6,19 @@
   justify-content: center;
 } */
 
-.header{
+.header {
   align-items: center;
-    display: flex;
-    background-color: #383838;
-    color: #fff;
-    justify-content: space-between;
-    padding: 20px;
+  display: flex;
+  background-color: #383838;
+  color: white;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.forms{
+.forms {
   align-items: center;
   background-color: #222;
-  color: #fff;
+  color: white;
   display: flex;
   justify-content: space-evenly;
   padding: 20px;

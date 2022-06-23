@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { butnAdd } from '../actions';
 
 class Forms extends Component {
   state = {
     valor: 0,
     description: '',
-    // method: 'Dinheiro',
-    // tag: 'Alimentação',
-
+    coin: '',
+    method: 'Dinheiro',
+    tag: 'Alimentação',
   }
 
   handleOnChange = ({ target }) => {
@@ -16,9 +17,14 @@ class Forms extends Component {
     this.setState({ [name]: value });
   }
 
+  handleOnClick = () => {
+    const { dispatch } = this.props;
+    dispatch(butnAdd(this.state));
+  }
+
   render() {
     const { moedas } = this.props;
-    const { valor, description } = this.state;
+    const { valor, description, method, tag, coin } = this.state;
     return (
       <form className="forms">
         <label htmlFor="value-input">
@@ -47,7 +53,9 @@ class Forms extends Component {
           MOEDA:
           <select
             id="moeda"
-            name="currencies"
+            name="coin"
+            value={ coin }
+            onChange={ this.handleOnChange }
           >
             {moedas.map((moeda, index) => (
               <option
@@ -66,6 +74,9 @@ class Forms extends Component {
           <select
             data-testid="method-input"
             id="method"
+            name="method"
+            value={ method }
+            onChange={ this.handleOnChange }
           >
             <option value="Dinheiro">
               Dinheiro
@@ -77,9 +88,6 @@ class Forms extends Component {
               Cartão de débito
             </option>
           </select>
-
-          <button type="button">Adicionar despesa</button>
-
         </label>
 
         <label htmlFor="tag">
@@ -87,6 +95,9 @@ class Forms extends Component {
           <select
             data-testid="tag-input"
             id="tag"
+            name="tag"
+            value={ tag }
+            onChange={ this.handleOnChange }
           >
             <option value="Alimentação">
               Alimentação
@@ -103,6 +114,15 @@ class Forms extends Component {
           </select>
 
         </label>
+
+        <button
+          type="button"
+          onClick={ this.handleOnClick }
+        >
+          Adicionar despesa
+
+        </button>
+
       </form>
     );
   }
@@ -113,4 +133,5 @@ const mapStateToProps = (state) => ({ moedas: state.wallet.currencies });
 export default connect(mapStateToProps)(Forms);
 Forms.propTypes = {
   moedas: PropTypes.arrayOf('string').isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
