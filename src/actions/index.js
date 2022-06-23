@@ -16,8 +16,8 @@ export const addApi = (api) => ({
 const getApi = async () => {
   const xablau = await fetch('https://economia.awesomeapi.com.br/json/all');
   const response = await xablau.json();
-  delete response.USDT;
-  return Object.keys(response);
+  const responseSemUSDT = Object.keys(response).filter((moeda) => moeda !== 'USDT');
+  return responseSemUSDT;
 };
 
 const getCurrences = () => async (dispatch) => {

@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+background-color: rgb(30, 70, 30);
 }
 
 code {
@@ -13,7 +14,18 @@ code {
 }
 
 .login{
+  align-items: center;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  min-width: 25vw;
+  text-align: center;
+  transition: box-shadow 1s ease-out;
+}
+
+.login .inputs{
+  display: inline-block;
+  position: relative;
 }

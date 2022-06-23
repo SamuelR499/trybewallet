@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import getApi, { addEmail } from '../actions/index';
+import { addEmail } from '../actions/index';
 
 class Login extends React.Component {
    state = {
@@ -30,7 +30,6 @@ onbuttonClick = async () => {
   const { email } = this.state;
   dispatch(addEmail(email));
   history.push('/carteira');
-  console.log(await getApi());
 }
 
 render() {
@@ -40,6 +39,7 @@ render() {
       <label htmlFor="email">
         e-mail
         <input
+          className="inputs"
           type="email"
           name="email"
           data-testid="email-input"
@@ -49,8 +49,9 @@ render() {
         />
       </label>
       <label htmlFor="senha">
-        senha (de no minimo 6 caracter)
+        senha
         <input
+          className="inputs"
           type="password"
           data-testid="password-input"
           name="senha"

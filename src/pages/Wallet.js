@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getCurrences from '../actions';
+import Header from '../componets/Header';
+import Forms from '../componets/Forms';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -15,16 +17,10 @@ class Wallet extends React.Component {
   // }
 
   render() {
-    const { email } = this.props;
-    console.log(this.props);
     return (
       <div>
-        <header>
-          <p data-testid="email-field">{ email }</p>
-          <p data-testid="total-field">{0}</p>
-          <p data-testid="header-currency-field">BRL</p>
-
-        </header>
+        <Header />
+        <Forms />
       </div>
     );
   }
@@ -38,6 +34,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 Wallet.propTypes = {
-  email: PropTypes.string.isRequired,
   moedas: PropTypes.func.isRequired,
 };
