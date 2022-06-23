@@ -10,7 +10,7 @@ class Login extends React.Component {
      buttonDisable: true,
    };
 
-   // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail me ajudou a interpretar regex
+   // https://pt.stackoverflow.com/questions/1386/express%C3%A3o-regular-para-valida%C3%A7%C3%A3o-de-e-mail me ajudou a interpretar regex e validar email
    handleOnChange = (event) => {
      const { name, value } = event.target;
      const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -41,7 +41,6 @@ render() {
         <input
           type="email"
           name="email"
-          required
           data-testid="email-input"
           id="email"
           value={ email }
@@ -58,7 +57,6 @@ render() {
           value={ senha }
           onChange={ this.handleOnChange }
           minLength="6"
-          required
         />
       </label>
       <button

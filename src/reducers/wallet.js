@@ -6,11 +6,11 @@ const INITIAL_STATE = {
   idToEdit: 0,
 };
 
-const user = (state = INITIAL_STATE, action) => {
+const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   default:
     return state;
   }
 };
 
-export default user;
+export default wallet;
