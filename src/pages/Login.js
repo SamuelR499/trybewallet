@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addEmail } from '../actions/index';
+import getApi, { addEmail } from '../actions/index';
 
 class Login extends React.Component {
    state = {
@@ -25,11 +25,12 @@ class Login extends React.Component {
      });
    };
 
-onbuttonClick = () => {
+onbuttonClick = async () => {
   const { history, dispatch } = this.props;
   const { email } = this.state;
   dispatch(addEmail(email));
   history.push('/carteira');
+  console.log(await getApi());
 }
 
 render() {
