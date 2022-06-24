@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { thunkWallet } from '../actions';
 
+const INITITAL_STATE = {
+  value: 0,
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+};
 class Forms extends Component {
   state = {
     id: 0,
-    value: 0,
-    description: '',
-    currency: 'USD',
-    method: 'Dinheiro',
-    tag: 'Alimentação',
+    ...INITITAL_STATE,
   }
 
   handleOnChange = ({ target }) => {
@@ -22,7 +25,7 @@ class Forms extends Component {
     const { dispatch } = this.props;
     dispatch(thunkWallet(this.state));
 
-    this.setState((prevState) => ({ id: prevState.id + 1 }));
+    this.setState((prevState) => ({ id: prevState.id + 1, ...INITITAL_STATE }));
   }
 
   render() {
@@ -33,9 +36,10 @@ class Forms extends Component {
         <label htmlFor="value-input">
           VALOR:
           <input
+            type="number"
             data-testid="value-input"
             id="value-input"
-            name="valor"
+            name="value"
             value={ value }
             onChange={ this.handleOnChange }
           />
@@ -56,7 +60,7 @@ class Forms extends Component {
           MOEDA:
           <select
             id="moeda"
-            name="coin"
+            name="currency"
             value={ currency }
             onChange={ this.handleOnChange }
           >
