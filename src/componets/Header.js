@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 class Header extends React.Component {
   render() {
     const { email, expenses } = this.props;
-    console.log(expenses);
 
     const total = expenses.reduce((acumulador, valorAtual) => acumulador
     + Number(valorAtual.value) * valorAtual.exchangeRates[valorAtual.currency].ask, 0);

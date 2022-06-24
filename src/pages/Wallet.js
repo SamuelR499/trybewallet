@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getCurrences } from '../actions';
 import Header from '../componets/Header';
 import Forms from '../componets/Forms';
+import Table from '../componets/Table';
 
 class Wallet extends React.Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class Wallet extends React.Component {
       <div>
         <Header />
         <Forms />
+        <Table />
       </div>
     );
   }
