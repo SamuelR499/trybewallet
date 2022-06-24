@@ -19,8 +19,9 @@ const wallet = (state = INITIAL_STATE, action) => {
   case BUTTON_ADD:
     return {
       ...state,
-      expenses: [...state.expenses, action.state],
+      expenses: [...state.expenses, action.payload],
     };
+
   default:
     return state;
   }

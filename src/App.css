@@ -1,15 +1,15 @@
 /* .App {
   align-items: center;
-  background: linear-gradient(120deg,#1e8634,#0a520b);
+  background-color: 120deg,#1e8634,#0a520b;
   display: flex;
   height: 100vh;
   justify-content: center;
-} */
+}  */
 
 .header {
-  align-items: center;
-  display: flex;
+	align-items: center;
   background-color: #383838;
+  display: flex;
   color: white;
   justify-content: space-between;
   padding: 20px;

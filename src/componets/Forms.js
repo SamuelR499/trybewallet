@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { butnAdd } from '../actions';
+import { thunkWallet } from '../actions';
 
 class Forms extends Component {
   state = {
-    valor: 0,
+    id: 0,
+    value: 0,
     description: '',
-    coin: '',
+    currency: 'USD',
     method: 'Dinheiro',
     tag: 'Alimentação',
   }
@@ -19,12 +20,14 @@ class Forms extends Component {
 
   handleOnClick = () => {
     const { dispatch } = this.props;
-    dispatch(butnAdd(this.state));
+    dispatch(thunkWallet(this.state));
+
+    this.setState((prevState) => ({ id: prevState.id + 1 }));
   }
 
   render() {
     const { moedas } = this.props;
-    const { valor, description, method, tag, coin } = this.state;
+    const { value, description, method, tag, currency } = this.state;
     return (
       <form className="forms">
         <label htmlFor="value-input">
@@ -33,7 +36,7 @@ class Forms extends Component {
             data-testid="value-input"
             id="value-input"
             name="valor"
-            value={ valor }
+            value={ value }
             onChange={ this.handleOnChange }
           />
         </label>
@@ -54,10 +57,10 @@ class Forms extends Component {
           <select
             id="moeda"
             name="coin"
-            value={ coin }
+            value={ currency }
             onChange={ this.handleOnChange }
           >
-            {moedas.map((moeda, index) => (
+            {moedas && moedas.map((moeda, index) => (
               <option
                 key={ index }
                 value={ moeda }

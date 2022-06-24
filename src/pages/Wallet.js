@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getCurrences from '../actions';
+import { getCurrences } from '../actions';
 import Header from '../componets/Header';
 import Forms from '../componets/Forms';
 
@@ -10,11 +10,6 @@ class Wallet extends React.Component {
     const { moedas } = this.props;
     moedas();
   }
-
-  // desmontapropr = () => {
-  //   const { moedas } = this.props;
-  //   moedas();
-  // }
 
   render() {
     return (
@@ -31,6 +26,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   moedas: () => dispatch(getCurrences()),
+  exchangeRates: () => dispatch(thunkWallet()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
 Wallet.propTypes = {
