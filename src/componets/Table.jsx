@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { buntonDel } from '../actions';
 
 class Table extends Component {
   render() {
-    const { expenses } = this.props;
-    console.log(expenses[0]);
+    const { expenses, deleteList } = this.props;
     return (
       <table>
         <thead>
-          <th>Descrição</th>
-          <th>Tag</th>
-          <th>Método de pagamento</th>
-          <th>Valor</th>
-          <th>Moeda</th>
-          <th>Câmbio utilizado</th>
-          <th>Valor convertido</th>
-          <th>Moeda de conversão</th>
-          <th>Editar/Excluir</th>
+          <tr>
+
+            <td>Descrição</td>
+            <td>Tag</td>
+            <td>Método de pagamento</td>
+            <td>Valor</td>
+            <td>Moeda</td>
+            <td>Câmbio utilizado</td>
+            <td>Valor convertido</td>
+            <td>Moeda de conversão</td>
+            <td>Editar/Excluir</td>
+          </tr>
         </thead>
         <tbody>
           {expenses && expenses.map((expense) => (
@@ -46,6 +49,18 @@ class Table extends Component {
                      * expense.exchangeRates[expense.currency].ask)).toFixed(2)}
               </td>
               <td>Real</td>
+              <td>
+                <button
+                  type="submit"
+                  data-testid="delete-btn"
+                  onClick={
+                    () => deleteList(expense.id)
+                  }
+                >
+                  Excluir
+
+                </button>
+              </td>
             </tr>
           ))}
 
@@ -57,8 +72,14 @@ class Table extends Component {
 
 const mapStateToProps = (state) => ({ expenses: state.wallet.expenses });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteList: (id) => dispatch(buntonDel(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf('string').isRequired,
+  deleteList: PropTypes.func.isRequired,
+
 };

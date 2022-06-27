@@ -2,7 +2,7 @@
 export const ADD_EMAIL = 'ADD_EMAIL';
 export const REQUEST_API = 'REQUEST_API';
 export const BUTTON_ADD = 'BUTTON_ADD';
-export const TESTE = 'TESTE';
+export const ON_DELETE = 'ON_DELETE';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -17,6 +17,11 @@ export const addApi = (api) => ({
 export const butnAdd = (payload) => ({
   type: BUTTON_ADD,
   payload,
+});
+
+export const buntonDel = (id) => ({
+  type: ON_DELETE,
+  id,
 });
 
 const getApi = async () => {
