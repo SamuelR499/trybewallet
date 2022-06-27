@@ -37,7 +37,13 @@ const wallet = (state = INITIAL_STATE, action) => {
   case UPDATE_DESPESA: {
     const indexDele = state.expenses.findIndex(({ id }) => id === action.despesa.id);
     const newExpenses = [...state.expenses];
-    newExpenses[indexDele] = action.despesa;
+    newExpenses[indexDele] = { ...state.expenses[indexDele],
+      value: action.despesa.value,
+      description: action.despesa.description,
+      currency: action.despesa.currency,
+      method: action.despesa.method,
+      tag: action.despesa.tag,
+    };
     return {
       ...state,
       expenses: newExpenses,
