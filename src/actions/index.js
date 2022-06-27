@@ -3,6 +3,8 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 export const REQUEST_API = 'REQUEST_API';
 export const BUTTON_ADD = 'BUTTON_ADD';
 export const ON_DELETE = 'ON_DELETE';
+export const UPDATE_LIST = 'UPDATE_LIST';
+export const UPDATE_DESPESA = 'UPDATE_DESPESA';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -42,7 +44,7 @@ export const getCurrences = () => async (dispatch) => {
   dispatch(addApi(api));
 };
 
-export const thunkWallet = (payload) => async (dispatch) => {
+export const actionThunkWallet = (payload) => async (dispatch) => {
   const objt = await getExchangeRates();
   const teste = {
     ...payload,
@@ -50,3 +52,12 @@ export const thunkWallet = (payload) => async (dispatch) => {
   };
   dispatch(butnAdd(teste));
 };
+export const creatActionEditList = (id) => ({
+  type: UPDATE_LIST,
+  id,
+});
+
+export const creatActionEdit = (despesa) => ({
+  type: UPDATE_DESPESA,
+  despesa,
+});

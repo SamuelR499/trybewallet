@@ -1,11 +1,13 @@
-import { REQUEST_API, BUTTON_ADD, ON_DELETE } from '../actions';
+import { REQUEST_API,
+  BUTTON_ADD, ON_DELETE,
+  UPDATE_LIST, UPDATE_DESPESA } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
   editor: false,
-  idToEdit: 0,
+  idToEdit: null,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -22,11 +24,27 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: [...state.expenses, action.payload],
     };
   case ON_DELETE:
-    console.log('gooool');
     return {
       ...state,
       expenses: state.expenses.filter((expense) => expense.id !== action.id),
     };
+  case UPDATE_LIST:
+    return {
+      ...state,
+      editor: true,
+      idToEdit: action.id,
+    };
+  case UPDATE_DESPESA: {
+    const indexDele = state.expenses.findIndex(({ id }) => id === action.despesa.id);
+    const newExpenses = [...state.expenses];
+    newExpenses[indexDele] = action.despesa;
+    return {
+      ...state,
+      expenses: newExpenses,
+      editor: false,
+      idToEdit: null,
+    };
+  }
 
   default:
     return state;

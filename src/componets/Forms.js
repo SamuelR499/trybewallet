@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { thunkWallet } from '../actions';
+import { actionThunkWallet, creatActionEdit } from '../actions';
 
 const INITITAL_STATE = {
   value: 0,
@@ -16,20 +16,33 @@ class Forms extends Component {
     ...INITITAL_STATE,
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { editor, idToEdit, despesaToEdit } = nextProps;
+    const { id } = this.state;
+    console.log(editor, idToEdit, despesaToEdit);
+    if (editor && idToEdit !== id) {
+      this.setState(despesaToEdit);
+    }
+    return true;
+  }
+
   handleOnChange = ({ target }) => {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
 
   handleOnClick = () => {
-    const { dispatch } = this.props;
-    dispatch(thunkWallet(this.state));
-
-    this.setState((prevState) => ({ id: prevState.id + 1, ...INITITAL_STATE }));
+    const { editor, editDespesa, thunkWallet } = this.props;
+    if (editor) {
+      editDespesa(this.state);
+    } else {
+      thunkWallet(this.state);
+      this.setState((prevState) => ({ id: prevState.id + 1, ...INITITAL_STATE }));
+    }
   }
 
   render() {
-    const { moedas } = this.props;
+    const { moedas, editor } = this.props;
     const { value, description, method, tag, currency } = this.state;
     return (
       <form className="forms">
@@ -122,23 +135,47 @@ class Forms extends Component {
 
         </label>
 
-        <button
-          type="button"
-          onClick={ this.handleOnClick }
-        >
-          Adicionar despesa
-
-        </button>
+        {!editor ? (
+          <button
+            type="button"
+            onClick={ this.handleOnClick }
+          >
+            Adicionar Despesa
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={ this.handleOnClick }
+          >
+            Editar despesa
+          </button>)}
 
       </form>
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  editDespesa: (despesa) => dispatch(creatActionEdit(despesa)),
+  thunkWallet: (payload) => dispatch(actionThunkWallet(payload)),
+});
+const mapStateToProps = (state) => ({
+  moedas: state.wallet.currencies,
+  editor: state.wallet.editor,
+  idToEdit: state.wallet.idToEdit,
+  despesaToEdit: state.wallet.expenses.find(({ id }) => id === state.wallet.idToEdit),
+});
 
-const mapStateToProps = (state) => ({ moedas: state.wallet.currencies });
-
-export default connect(mapStateToProps)(Forms);
+export default connect(mapStateToProps, mapDispatchToProps)(Forms);
 Forms.propTypes = {
   moedas: PropTypes.arrayOf('string').isRequired,
-  dispatch: PropTypes.func.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  editor: PropTypes.bool.isRequired,
+  despesaToEdit: PropTypes.shape({}),
+  editDespesa: PropTypes.func.isRequired,
+  thunkWallet: PropTypes.func.isRequired,
+
+};
+
+Forms.defaultProps = {
+  despesaToEdit: {},
 };
