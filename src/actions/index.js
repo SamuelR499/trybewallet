@@ -27,16 +27,16 @@ export const buntonDel = (id) => ({
 });
 
 const getApi = async () => {
-  const xablau = await fetch('https://economia.awesomeapi.com.br/json/all');
-  const response = await xablau.json();
-  const responseSemUSDT = Object.keys(response).filter((moeda) => moeda !== 'USDT');
-  return responseSemUSDT;
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  const dataSemUSDT = Object.keys(data).filter((moeda) => moeda !== 'USDT');
+  return dataSemUSDT;
 };
 
 const getExchangeRates = async () => {
-  const xablau = await fetch('https://economia.awesomeapi.com.br/json/all');
-  const response = await xablau.json();
-  return response;
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  return data;
 };
 
 export const getCurrences = () => async (dispatch) => {
